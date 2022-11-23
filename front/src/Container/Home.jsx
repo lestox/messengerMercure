@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import { Component } from "react";
-import Button from "../Component/Button";
+import Button from "../Component/Global/Button";
 import styled from "styled-components";
 
 const ContainerStyle = styled.div`
@@ -14,7 +14,7 @@ const ContainerStyle = styled.div`
 export default function Home(){
     return (
         <ContainerStyle>
-        <h1>Welcome to this awesome chat app 💫</h1>
+        <h1>Welcome to this awesome chatting app 👋</h1>
         <div>
             <a href="/login"><Button primary>Login</Button></a>
             <a href="/chat"><Button primary>Chat</Button></a>

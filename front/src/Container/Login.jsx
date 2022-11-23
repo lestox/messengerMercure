@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
+import Button from "../Component/Button";
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -41,12 +42,10 @@ export default function Login() {
                   </div>
       
                   <div className="pt-1 mb-4">
-                    <button className="btn btn-info btn-lg btn-block" type="button">Login</button>
+                    <Button primary>Login</Button>
                   </div>
       
                   
-                  <p>Don't have an account? <a href="#!" className="link-info">Register here</a></p>
-      
                 </form>
       
               </div>

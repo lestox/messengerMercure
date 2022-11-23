@@ -4,6 +4,8 @@ import reactLogo from './assets/react.svg'
 import Login from './Container/Login'
 import Chat from './Container/Chat'
 import Home from './Container/Home'
+import Chat2 from './Container/Chat2'
+
 
 function App() {
 
@@ -13,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/chat" element= {<Chat/>}/>
+        <Route path="/chat2" element= {<Chat2/>}/>
       </Routes>
     </BrowserRouter>
   )

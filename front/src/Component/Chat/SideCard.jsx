@@ -7,6 +7,7 @@ const StyledSideCard = styled.div`
     display: flex;
     align-items: center;
     padding: 15px 0px 15px 20px;
+    position: absolute;
     
     &:hover {
         background-color: #172d95;

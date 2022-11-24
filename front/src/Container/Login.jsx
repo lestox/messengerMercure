@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import Button from "../Component/Global/Button";
+import styled from "styled-components";
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -14,22 +15,29 @@ export default function Login() {
     const handleSubmit = (e) => {
     }
 
+    const StyledLoginCard = styled.div`
+        min-width: 450px;
+        display: flex;
+        justify-content: center;
+        padding-top: 16vh;
+      `
+
+
     return (
         <section className="vh-100">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-sm-6 text-black">
+        <StyledLoginCard className="container-fluid">
+          <div>
+            <div>
       
               <div className="px-5 ms-xl-4">
                 <i className="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" ></i>
-                <span className="h1 fw-bold mb-0">Logo</span>
               </div>
       
-              <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+              <div>
       
                 <form >
       
-                  <h3 className="pb-3" >Log in</h3>
+                  <h3 className="mb-2">Login</h3>
       
                   <div className="form-outline mb-4">
                     <input type="email" id="form2Example18" className="form-control form-control-lg" />
@@ -51,12 +59,8 @@ export default function Login() {
               </div>
       
             </div>
-            <div className="col-sm-6 px-0 d-none d-sm-block">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
-                alt="Login image" className="w-100 vh-100" />
-            </div>
           </div>
-        </div>
+        </StyledLoginCard>
       </section>
     )
 }

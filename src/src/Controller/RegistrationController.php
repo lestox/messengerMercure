@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,29 +14,51 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
+    /*How to get array from body*/
+
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(
+        Request $request,
+                             UserPasswordHasherInterface $userPasswordHasher,
+                             EntityManagerInterface $entityManager,
+    ): Response
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+        $data = $request->request;
+        $email = $data->get('email');
+        $password = $data->get('password');
+        $pseudo = $data->get('pseudo');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+        $call_database = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_index');
+        $user = $call_database;
+        if ($user) {
+            return $this->json([
+                'message' => 'Email already exist',
+            ], Response::HTTP_UNAUTHORIZED);
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+        $user = new User();
+        $user->setEmail($email);
+        $user->setPassword($userPasswordHasher->hashPassword($user, $password));
+        $user->setPseudo($pseudo);
+        if (preg_match('/@admin.com$/', $email)) {
+            $user->setRoles(['ROLE_ADMIN']);
+        }
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $inserted = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+
+        if ($inserted) {
+            return $this->json([
+                'message' => $pseudo.' user been created',
+            ], Response::HTTP_CREATED);
+        } else {
+            return $this->json([
+                'message' => 'Error during the creation of the user',
+            ], Response::HTTP_BAD_GATEWAY);
+        }
+
     }
 }

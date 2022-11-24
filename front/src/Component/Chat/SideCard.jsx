@@ -23,6 +23,7 @@ const StyledImg = styled.img`
 const StyledName = styled.h4`
     margin-left: 15px;
     font-size: 1.2rem;
+    margin-bottom: 0;
 `
 
 const SideCard = () => {

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-const StyledMessageInput = styled.input`
+const StyledMessageInput = styled.textarea`
     width: 100%;
-    height: 6vh;
+    height: 7vh;
     background-color: #273C57;
     border: none;
     color: lightgray;

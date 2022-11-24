@@ -18,6 +18,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 30)]
+    private ?string $pseudo = null;
+
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -45,6 +48,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->email = $email;
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    /**
+     * @param string|null $pseudo
+     * @return User
+     */
+    /**
+     * @param string|null $pseudo
+     */
+    public function setPseudo(?string $pseudo): void
+    {
+        $this->pseudo = $pseudo;
     }
 
     /**

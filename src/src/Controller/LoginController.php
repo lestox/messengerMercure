@@ -9,10 +9,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'app_login')]
-    public function index(): Response
+    public function login(string $appSecret): Response
     {
-        return $this->render('login/index.html.twig', [
-            'controller_name' => 'LoginController',
+        $user = $this->getUser();
+
+        if ($user === null) {
+            return $this->json([
+                'message' => 'Missing credentials',
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        $jwt = JWT::encode([
+            'email' => $user->getEmail(),
+            'id' => $user->getId(),
+        ], $appSecret, 'HS256');
+
+        return $this->json([
+            'jwt_token' => $jwt,
         ]);
     }
 

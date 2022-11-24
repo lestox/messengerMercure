@@ -145,6 +145,8 @@
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/validator" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/data-fixtures" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/doctrine-fixtures-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/namshi/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/lexik/jwt-authentication-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

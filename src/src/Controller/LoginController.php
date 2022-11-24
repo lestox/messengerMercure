@@ -2,31 +2,19 @@
 
 namespace App\Controller;
 
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
-    public function login(string $appSecret): Response
+    #[Route('/login_check', name: 'app_login_check', methods: ['POST'])]
+    public function login_check(string $appSecret, UserInterface $user, JWTTokenManagerInterface $JWTManager): Response
     {
-        $user = $this->getUser();
-
-        if ($user === null) {
-            return $this->json([
-                'message' => 'Missing credentials',
-            ], Response::HTTP_UNAUTHORIZED);
-        }
-
-        $jwt = JWT::encode([
-            'email' => $user->getEmail(),
-            'id' => $user->getId(),
-        ], $appSecret, 'HS256');
-
-        return $this->json([
-            'jwt_token' => $jwt,
-        ]);
+        return new JsonResponse(['token' => $JWTManager->create($user)]);
     }
 
     #[Route('/logout', name: 'app_logout')]

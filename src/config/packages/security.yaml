@@ -15,12 +15,10 @@ security:
             custom_authenticator: App\Security\Authenticator
             lazy: true
             provider: app_user_provider
-            form_login:
-                check_path: app_login
-                login_path: app_login
-                enable_csrf: true
-                default_target_path: app_index
-                always_use_default_target_path: true
+            json_login:
+                check_path: /login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
             logout:
                 path: app_logout
                 target: app_index

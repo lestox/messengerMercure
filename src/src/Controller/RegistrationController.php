@@ -16,7 +16,7 @@ class RegistrationController extends AbstractController
 {
     /*How to get array from body*/
 
-    #[Route('/register', name: 'app_register')]
+    #[Route('/register', name: 'app_register', methods: ['POST'])]
     public function register(
         Request $request,
                              UserPasswordHasherInterface $userPasswordHasher,

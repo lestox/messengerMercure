@@ -1,8 +1,11 @@
 <?php
 
+namespace App\Security;
+
 use Firebase\JWT\JWT;
 
-class JwtHelper {
+class JwtHelper
+{
     private string $mercureSecret;
 
     public function __construct(string $mercureSecret)

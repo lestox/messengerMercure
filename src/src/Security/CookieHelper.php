@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Security;
+
 use Symfony\Component\HttpFoundation\Cookie;
 
 class CookieHelper

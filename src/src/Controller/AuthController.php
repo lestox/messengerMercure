@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use CookieHelper;
+use App\Security\CookieHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;

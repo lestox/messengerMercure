@@ -11,13 +11,16 @@ const StyledSideBar = styled.div`
 
 const SideBar = () => {
     return (
-        <>
         <StyledSideBar>
             <UserSearchbar/>
-            <SideCard></SideCard>
-            <SideCard></SideCard>
+            <SideCard/>
+            <SideCard/>
+            <SideCard/>
+            <SideCard/>
+            <SideCard/>
+            <SideCard/>
+            <SideCard/>
         </StyledSideBar>
-        </>
     )
 }
 

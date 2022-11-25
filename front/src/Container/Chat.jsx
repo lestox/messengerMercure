@@ -17,15 +17,15 @@ export default function Chat() {
     const handleSubmit = (e) => {
     }
 
-    const StyledBody = styled.body`
+    const StyledGlobalContainer = styled.div`
         display: flex;
     `
 
     return (
-        <StyledBody>
-        <SideBar></SideBar>
-        <Conversation></Conversation>
-        </StyledBody>
+        <StyledGlobalContainer>
+            <SideBar/>
+            <Conversation/>
+        </StyledGlobalContainer>
       
     )
 }

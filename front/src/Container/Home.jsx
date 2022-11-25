@@ -12,6 +12,7 @@ const ContainerStyle = styled.div`
 `
 
 export default function Home(){
+
     return (
         <ContainerStyle>
         <h1>Welcome to this awesome chatting app 👋</h1>

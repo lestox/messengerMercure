@@ -4,7 +4,7 @@ services:
     alpine:
         build:
             context: .
-            dockerfile: ./dockerfiles/symfony-dockerfile
+            dockerfile: Dockerfile
         container_name: symfony_docker
         restart: on-failure
         ports:
@@ -12,8 +12,6 @@ services:
         volumes:
             - ./conf/site.conf:/etc/nginx/http.d/default.conf
             - ./src:/var/www/html
-        networks:
-            - acpSymfony
 
     db:
         image: mariadb:10.8.2
@@ -24,8 +22,6 @@ services:
         environment:
             MYSQL_ROOT_USER: root
             MYSQL_ROOT_PASSWORD: 'password'
-        networks:
-            - acpSymfony
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
@@ -41,32 +37,32 @@ services:
         networks:
             - acpSymfony
 
-    caddy:
+    mercure:
         image: dunglas/mercure
         restart: unless-stopped
         environment:
             # Uncomment the following line to disable HTTPS
             SERVER_NAME: ':80'
-            MERCURE_PUBLISHER_JWT_KEY: '!ChangeMe!'
-            MERCURE_SUBSCRIBER_JWT_KEY: '!ChangeMe!'
+            MERCURE_PUBLISHER_JWT_KEY: 'mkjgfdsmlgfjfjdglkfdlkjgflkdjgjdslgkfdlksjgfdsglkfdjslkj'
+            MERCURE_SUBSCRIBER_JWT_KEY: 'mkjgfdsmlgfjfjdglkfdlkjgflkdjgjdslgkfdlksjgfdsglkfdjslkj'
+            MERCURE_EXTRA_DIRECTIVES:
+                cors_origins "http://localhost:5173"
+                cors_origins "http://localhost:1234"
         # Uncomment the following line to enable the development mode
-        command: /usr/bin/caddy run -config /etc/caddy/Caddyfile.dev
+        # command: /usr/bin/caddy run -config /etc/caddy/Caddyfile.dev
         ports:
             - "2345:80"
             - "443:443"
-        volumes:
-            - caddy_data:/data
-            - caddy_config:/config
-    
+
     online-check:
-        build: 
+        build:
             context: .
             dockerfile: ./dockerfiles/onlinecheck-dockerfile
         volumes:
             - ./onlineCheck/app:/app
         ports:
             - "8000:5000"
-        restart: on-failure 
+        restart: on-failure
         networks:
             - onlineCheck
 
@@ -83,8 +79,6 @@ services:
 
 volumes:
     db-data:
-    caddy_data:
-    caddy_config:
 
 networks:
     acpSymfony:

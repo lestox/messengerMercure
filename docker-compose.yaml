@@ -4,7 +4,7 @@ services:
     alpine:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: ./dockerfiles/symfony-dockerfile
         container_name: symfony_docker
         restart: on-failure
         ports:
@@ -57,12 +57,35 @@ services:
         volumes:
             - caddy_data:/data
             - caddy_config:/config
+    
+    online-check:
+        build: 
+            context: .
+            dockerfile: ./dockerfiles/onlinecheck-dockerfile
+        volumes:
+            - ./onlineCheck/app:/app
+        ports:
+            - "8000:5000"
+        restart: on-failure 
+        networks:
+            - onlineCheck
+
+    redis:
+        image: "redis:alpine"
+        command: redis-server
+        expose:
+            - "6379"
+        volumes:
+            - ./redis/redis-data:/data
+            - ./redis/redis-conf:/usr/local/etc/redis/redis.conf
+        networks:
+            - onlineCheck
 
 volumes:
     db-data:
     caddy_data:
     caddy_config:
 
-
 networks:
     acpSymfony:
+    onlineCheck:

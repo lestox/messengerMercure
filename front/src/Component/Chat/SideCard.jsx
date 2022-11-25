@@ -7,6 +7,7 @@ const StyledSideCard = styled.div`
     display: flex;
     align-items: center;
     padding: 15px 0px 15px 20px;
+    position: absolute;
     
     &:hover {
         background-color: #172d95;
@@ -22,6 +23,7 @@ const StyledImg = styled.img`
 const StyledName = styled.h4`
     margin-left: 15px;
     font-size: 1.2rem;
+    margin-bottom: 0;
 `
 
 const SideCard = () => {

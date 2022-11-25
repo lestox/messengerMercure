@@ -10,6 +10,7 @@ const StyledUserSearchbar = styled.input`
     color: lightgray;
     padding: 20px;
     outline: none;
+    overflow: scroll;
 `
 
 const UserSearchbar = () => {

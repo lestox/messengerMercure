@@ -27,8 +27,10 @@ function App() {
                 eventSource.onmessage = handleMessage
             });
 
-        return () => {
-            eventSource.close();
+        if (eventSource !== undefined) {
+            return () => {
+                eventSource.close();
+            };
         }
     }, []);
 

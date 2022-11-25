@@ -25,6 +25,3 @@ def isUserOnline(userId):
 def setUserOnline(userId):
     redis.set(userId, "", ex=30)
     return 'OK', 200
-
-
-

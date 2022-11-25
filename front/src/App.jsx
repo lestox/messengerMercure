@@ -1,9 +1,7 @@
-import {useEffect, useState} from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './Container/Login'
 import Chat from './Container/Chat'
 import Home from './Container/Home'
-import Chat2 from './Container/Chat'
 
 
 function App() {

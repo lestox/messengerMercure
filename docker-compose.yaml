@@ -20,7 +20,22 @@ services:
         volumes:
             - db-data:/var/lib/mysql
         environment:
+            MYSQL_ROOT_USER: root
             MYSQL_ROOT_PASSWORD: 'password'
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin_docker
+        restart: always
+        ports:
+            - "8080:80"
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_USER: root
+            PMA_PASSWORD: password
+        networks:
+            - acpSymfony
 
     mercure:
         image: dunglas/mercure

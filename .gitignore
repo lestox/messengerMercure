@@ -11,9 +11,8 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-
-# AWS User-specific
-.idea/**/aws.xml
+.idea/
+.idea/php.xml
 
 # Generated files
 .idea/**/contentModel.xml

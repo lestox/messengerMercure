@@ -1,7 +1,7 @@
 import {useState} from "react";
 import '../assets/css/chat.css';
 import {useLocation, useNavigate} from "react-router-dom";
-import SideBar from "../Component/Chat/SideBar";
+import NavBar from "../Component/Global/NavBar";
 import Conversation from "../Component/Chat/Conversation";
 import styled from "styled-components";
 
@@ -23,7 +23,7 @@ export default function Chat() {
 
     return (
         <StyledGlobalContainer>
-            <SideBar/>
+            <NavBar/>
             <Conversation/>
         </StyledGlobalContainer>
       

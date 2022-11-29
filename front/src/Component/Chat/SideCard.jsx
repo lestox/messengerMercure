@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import UserImage from '../Global/UserImage'
 
 const StyledSideCard = styled.div`
-    width: 280px;
+    width: 100%;
     height: 10vh;
     display: flex;
     align-items: center;
@@ -15,7 +15,7 @@ const StyledSideCard = styled.div`
       }
 `
 
-const StyledName = styled.h4`
+const StyledName = styled.h3`
     margin-left: 15px;
     margin-bottom: 0;
     font-weight: 500;

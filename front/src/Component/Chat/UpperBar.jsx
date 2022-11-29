@@ -4,14 +4,21 @@ import UserImage from '../Global/UserImage'
 
 const StyledUpperBar = styled.div`
     width: 100%;
-    height: 7vh;
+    height: 10vh;
     border: none;
     color: lightgray;
-    padding: 20px;
+    background-color: var(--white-color);
+    padding: 15px 40px;
     outline: none;
     position: fixed;
     top: 0;
     display: flex;
+`
+
+const StyledTextContainer = styled.div`
+    margin-left: 16px;
+    margin-top: 5px;
+
 `
 
 
@@ -20,7 +27,10 @@ const UpperBar = () => {
     return (
         <StyledUpperBar>
             <UserImage/>
-            <h3>Paul Pogba</h3>
+            <StyledTextContainer>
+                <h2>Paul Pogba</h2>
+                <span>Online</span>
+            </StyledTextContainer>
         </StyledUpperBar>
     )
 }

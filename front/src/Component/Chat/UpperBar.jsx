@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import UserImage from '../Global/UserImage'
 
 const StyledUpperBar = styled.div`
-    width: 100%;
+    width: calc(100vw - (70px + 25vw));
     height: 10vh;
     border: none;
     color: lightgray;

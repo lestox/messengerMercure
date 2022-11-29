@@ -7,9 +7,11 @@ const StyledMessageInput = styled.textarea`
     height: 7vh;
     background-color: var(--white-color);
     border-radius: 20px;
+    width: calc(64vw - 60px);
     border: none;
     color: lightgray;
     padding: 20px;
+    margin-bottom: 25px;
     outline: none;
     overflow: hidden;
     resize: none;

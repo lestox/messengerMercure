@@ -4,7 +4,7 @@ import SideCard from './SideCard'
 import UserSearchbar from './UserSearchbar'
 
 const StyledSideBar = styled.div`
-    width: 400px;
+    width: 25vw;
     height: 100vh;
     background-color: var(--white-color);
 `

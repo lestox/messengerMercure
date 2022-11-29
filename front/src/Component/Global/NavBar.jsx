@@ -9,7 +9,7 @@ import darkmodeSvg from '../../assets/svg/sidebar/darkmode.svg'
 
 const StyledNavBar = styled.div`
     background-color: var(--primary-color);
-    width: 80px;
+    width: 70px;
     height: 100vh;
 `
 

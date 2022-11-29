@@ -6,7 +6,7 @@ import UserSearchbar from './UserSearchbar'
 import UpperBar from './UpperBar'
 
 const StyledConversation = styled.div`
-    width: calc(100% - 280px);
+    width: 64vw;;
     bottom: 0;
 `
 

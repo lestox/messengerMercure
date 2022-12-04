@@ -4,7 +4,7 @@ import NavButton from './NavButton'
 import chatSvg from '../../assets/svg/sidebar/chat.svg'
 import accountSvg from '../../assets/svg/sidebar/account.svg'
 import settingSvg from '../../assets/svg/sidebar/settings.svg'
-import darkmodeSvg from '../../assets/svg/sidebar/darkmode.svg'
+import darkModeSvg from '../../assets/svg/sidebar/darkMode.svg'
 
 
 const StyledNavBar = styled.div`
@@ -27,7 +27,7 @@ const NavBar = () => {
                 <NavButton logoSvg={chatSvg} src='/chat'/>
                 <NavButton logoSvg={accountSvg}/>
                 <NavButton logoSvg={settingSvg}/>
-                <NavButton logoSvg={darkmodeSvg}/>
+                <NavButton logoSvg={darkModeSvg}/>
             </StyledNavSection>
                
         </StyledNavBar>

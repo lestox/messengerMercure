@@ -10,7 +10,7 @@ const StyledSideCard = styled.div`
     padding: 15px 0px 15px 20px;
     
     &:hover {
-        background-color: #172d95;
+        background-color: var(--secondary-color);
         cursor: pointer;
       }
 `

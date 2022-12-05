@@ -36,3 +36,8 @@ h4 {
 span {
     color: var(--mid-text-color);
 }
+
+.center {
+    margin-right: auto!important;
+    margin-left: auto!important;
+}

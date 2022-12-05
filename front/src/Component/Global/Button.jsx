@@ -2,16 +2,14 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 const StyledButton = styled.button`
-    border-radius: 12px;
-    background-color: #007FFF;
+    border-radius: 10px;
+    background-color: var(--primary-color);
     opacity: ${props => (props.secondary ? 0.5 : 1)};
     color: #fff;
-    padding: 10px 15px;
     font-size: '16px';
-    font-weight: bold;
-    padding: 12px 24px;
+    padding: 13px 55px;
     cursor: pointer;
-    margin: 15px 30px 15px 0px;
+    margin: 15px 10px 15px 10px;
     border: none;
 `
 

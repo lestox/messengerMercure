@@ -20,7 +20,6 @@ const ChatMercure = () => {
     const handleMessage = (e) => {
         let id = chatList.length + 1;
         let message = (JSON.parse(e.data));
-        console.log(chatList)
         setChatList((prev) => [
             ...prev,
             {
@@ -28,7 +27,6 @@ const ChatMercure = () => {
                 message: message['message'],
             }
         ]);
-        console.log(chatList)
     }
 
     let eventSource;

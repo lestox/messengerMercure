@@ -2,16 +2,10 @@
 
 use App\Kernel;
 
-//header('Access-Control-Allow-Origin: *');
-//header("Access-Control-Allow-Headers: *");
-//header("Access-Control-Allow-Methods: *");
-//header("Allow: *");
-//
-//$method = $_SERVER['REQUEST_METHOD'];
-//
-//if ($method === "OPTIONS") {
-//    die();
-//}
+header('Access-Control-Allow-Origin:http://localhost:5173');
+header('Access-Control-Allow-Headers:*');
+header('Access-Control-Allow-Credentials:true');
+header('Access-Control-Allow-Headers:X-Requested-With, Content-Type, withCredentials');
 
 require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 

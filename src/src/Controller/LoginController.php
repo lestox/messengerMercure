@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class LoginController extends AbstractController
 {
-    #[Route('/login_check', name: 'app_login_check', methods: ['POST'])]
+    #[Route('/login', name: 'app_login', methods: ['POST'])]
     public function login_check(string $appSecret, UserInterface $user, JWTTokenManagerInterface $JWTManager): Response
     {
         return new JsonResponse(['token' => $JWTManager->create($user)]);

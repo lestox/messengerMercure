@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\MessageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
@@ -11,48 +12,53 @@ class Message
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id_message = null;
 
-    #[ORM\Column]
-    private ?int $conversation_id = null;
+    /*#[ORM\Column]
+    #[ORM\ManyToOne(targetEntity: "Conversation", inversedBy: "messages")]
+    private ?int id_channel = null;*/
 
-    #[ORM\Column]
-    private ?int $user_id = null;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "messages_sent")]
+    private ?User $user;
 
-    #[ORM\Column(length: 100)]
-    private ?string $content = null;
+    #[ORM\Column(length: 300, nullable: false)]
+    private string $content;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeImmutable $created_at;
 
     #[ORM\Column(nullable: true)]
     private ?int $ghost_time = null;
 
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $ghost_deleted_at = null;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->id_message;
     }
 
-    public function getConversationId(): ?int
+    /**
+     * @param int|null $id_message
+     */
+    public function setIdMessage(?int $id_message): void
     {
-        return $this->conversation_id;
+        $this->id_message = $id_message;
     }
 
-    public function setConversationId(int $conversation_id): self
+    public function getUser(): ?User
     {
-        $this->conversation_id = $conversation_id;
-
-        return $this;
+        return $this->user;
     }
 
-    public function getUserId(): ?int
+    public function setUser(?User $user): self
     {
-        return $this->user_id;
-    }
-
-    public function setUserId(int $user_id): self
-    {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
@@ -92,4 +98,17 @@ class Message
 
         return $this;
     }
+
+    public function getGhostDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->ghost_deleted_at;
+    }
+
+    public function setGhostDeletedAt(?\DateTimeInterface $ghost_deleted_at): self
+    {
+        $this->ghost_deleted_at = $ghost_deleted_at;
+
+        return $this;
+    }
+
 }

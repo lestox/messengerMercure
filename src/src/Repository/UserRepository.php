@@ -57,18 +57,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
 
-    public function findAllExceptConnectedUser($id){
+    /**
+     * @return array<User>
+     */
+    public function findAllExceptConnectedUser(User $user): array{
         return $this->createQueryBuilder('u')
-            ->select('u.id', 'u.pseudo', 'u.email')
             ->andWhere('u.id != :val')
-            ->setParameter('val', $id)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findAllUsers(){
-        return $this->createQueryBuilder('u')
-            ->select('u.id', 'u.pseudo', 'u.email')
+            ->setParameter('val', $user->getId())
             ->getQuery()
             ->getResult();
     }

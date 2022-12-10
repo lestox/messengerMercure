@@ -14,19 +14,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
-    /*How to get array from body*/
 
     #[Route('/register', name: 'app_register', methods: ['POST'])]
     public function register(
         Request $request,
-                             UserPasswordHasherInterface $userPasswordHasher,
-                             EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $userPasswordHasher,
+        EntityManagerInterface $entityManager,
     ): Response
     {
         $data = $request->request;
         $email = $data->get('email');
         $password = $data->get('password');
-        $pseudo = $data->get('pseudo');
+        $first_name = $data->get('first_name');
+        $last_name = $data->get('last_name');
+        $photo = $data->get('photo');
 
         $call_database = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
@@ -40,7 +41,9 @@ class RegistrationController extends AbstractController
         $user = new User();
         $user->setEmail($email);
         $user->setPassword($userPasswordHasher->hashPassword($user, $password));
-        $user->setPseudo($pseudo);
+        $user->setFirstName($first_name);
+        $user->setLastName($last_name);
+        $user->setPhoto($photo);
         if (preg_match('/@admin.com$/', $email)) {
             $user->setRoles(['ROLE_ADMIN']);
         }
@@ -52,7 +55,7 @@ class RegistrationController extends AbstractController
 
         if ($inserted) {
             return $this->json([
-                'message' => $pseudo.' user been created',
+                'message' => $first_name." ".$last_name.' user been created',
             ], Response::HTTP_CREATED);
         } else {
             return $this->json([

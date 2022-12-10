@@ -82,16 +82,6 @@
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/friendsofphp/proxy-manager-lts 2" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/lcobucci/jwt 2" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/inflector 2" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/migrations 2" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/orm 2" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/collections 2" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/doctrine-migrations-bundle 2" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/common 2" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/doctrine-bundle 2" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/persistence 2" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/annotations 2" />
-      <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/dbal 2" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/asset 2" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/yaml 2" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/http-client 2" />
@@ -147,6 +137,13 @@
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/doctrine/doctrine-fixtures-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/namshi/jose" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/lexik/jwt-authentication-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/gesdinet/jwt-refresh-token-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/serializer" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/phpstan/phpdoc-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/phpdocumentor/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/phpdocumentor/type-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/phpdocumentor/reflection-common" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/webmozart/assert" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

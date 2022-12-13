@@ -12,7 +12,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity('Email', 'Cet email est déjà utilisé')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -63,19 +62,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private bool $been_banned = false;
 
-    #[ORM\OneToMany(mappedBy: 'user' , targetEntity: Message::class)]
-    private Collection $messages_sent;
+    #[ORM\ManyToMany(targetEntity: Channel::class, mappedBy: 'users')]
+    private Collection $channel;
 
-    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Channel::class)]
-    private Collection $channels;
+    /**
+     * @return Collection
+     */
+    public function getChannel(): Collection
+    {
+        return $this->channel;
+    }
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class, orphanRemoval: true)]
+    private Collection $message;
 
     public function __construct()
     {
         $this->created_at = new \DateTime();
         $this->updated_at = new \DateTime();
         $this->last_connected_at = new \DateTime();
-        $this->messages_sent = new ArrayCollection();
-        $this->channels = new ArrayCollection();
+        $this->channel = new ArrayCollection();
+        $this->message = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -259,38 +266,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return ArrayCollection
-     */
-    public function getMessagesSent(): ArrayCollection
-    {
-        return $this->messages_sent;
-    }
-
-    /**
-     * @param ArrayCollection $messages_sent
-     */
-    public function setMessagesSent(ArrayCollection $messages_sent): void
-    {
-        $this->messages_sent = $messages_sent;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getChannel(): ArrayCollection
-    {
-        return $this->channels;
-    }
-
-    /**
-     * @param ArrayCollection $channels
-     */
-    public function setChannel(ArrayCollection $channels): void
-    {
-        $this->channels = $channels;
-    }
-
-    /**
      * @return \DateTimeInterface
      */
     public function getUpdatedAt(): \DateTimeInterface
@@ -357,5 +332,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         //
+    }
+
+    public function addChannel(Channel $channel): self
+    {
+        if (!$this->channel->contains($channel)) {
+            $this->channel->add($channel);
+            $channel->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChannel(Channel $channel): self
+    {
+        if ($this->channel->removeElement($channel)) {
+            $channel->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessage(): Collection
+    {
+        return $this->message;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->message->contains($message)) {
+            $this->message->add($message);
+            $message->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->message->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getUser() === $this) {
+                $message->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

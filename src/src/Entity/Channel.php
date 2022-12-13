@@ -3,23 +3,23 @@
 namespace App\Entity;
 
 use App\Repository\ChannelRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ChannelRepository::class)]
+#[UniqueEntity(fields: ['id_channel'], message: 'There is already a channel with this id')]
 class Channel
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false)]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::GUID)]
-    private ?string $id_channel = null;
-
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'channel')]
-    #[ORM\JoinColumn(name: 'id', referencedColumnName: 'id', nullable: false)]
-    private ?User $users;
+    #[ORM\Column(type: Types::GUID, unique: true)]
+    private ?string $id_channel;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $name = null;
@@ -27,9 +27,19 @@ class Channel
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pic_channel = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
     private ?User $admin_channel;
+
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'channel')]
+    private Collection $users;
+
+    #[ORM\OneToMany(mappedBy: 'channel', targetEntity: Message::class, orphanRemoval: true)]
+    private Collection $messages;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,18 +54,6 @@ class Channel
     public function setIdChannel(string $id_channel): self
     {
         $this->id_channel = $id_channel;
-
-        return $this;
-    }
-
-    public function getUsers(): ?User
-    {
-        return $this->users;
-    }
-
-    public function setUsers(?User $users): self
-    {
-        $this->users = $users;
 
         return $this;
     }
@@ -102,5 +100,59 @@ class Channel
     public function setId(?int $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        $this->users->removeElement($user);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setChannel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getChannel() === $this) {
+                $message->setChannel(null);
+            }
+        }
+
+        return $this;
     }
 }

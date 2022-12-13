@@ -12,8 +12,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'app_login', methods: ['POST'])]
-    public function login_check(string $appSecret, UserInterface $user, JWTTokenManagerInterface $JWTManager): Response
+    public function login(string $appSecret, UserInterface $user, JWTTokenManagerInterface $JWTManager): JsonResponse
     {
+        if($user->isBeenBanned()){
+            return new JsonResponse(['message' => 'You have been banned']);
+        }
+
         return new JsonResponse(['token' => $JWTManager->create($user)]);
     }
 

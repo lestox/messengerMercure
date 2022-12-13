@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Channel;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,28 +40,27 @@ class ChannelRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Channel[] Returns an array of Channel objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findMessagesByChannel($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.Date_creation', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Channel
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @param User $user
+     * @return array
+     */
+    public function findChannelByUser(User $user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.users = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('c.Date_creation', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

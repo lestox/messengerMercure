@@ -14,18 +14,11 @@ class Message
     #[ORM\Column]
     private ?int $id_message = null;
 
-    /*#[ORM\Column]
-    #[ORM\ManyToOne(targetEntity: "Conversation", inversedBy: "messages")]
-    private ?int id_channel = null;*/
-
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "messages_sent")]
-    private ?User $user;
-
     #[ORM\Column(length: 300, nullable: false)]
     private string $content;
 
-    #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeImmutable $created_at;
+    #[ORM\Column(type: 'datetime', nullable: false)]
+    private \DateTime $created_at;
 
     #[ORM\Column(nullable: true)]
     private ?int $ghost_time = null;
@@ -33,9 +26,17 @@ class Message
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $ghost_deleted_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Channel $channel = null;
+
+    #[ORM\ManyToOne(inversedBy: 'message')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function __construct()
     {
-        $this->created_at = new \DateTimeImmutable();
+        $this->created_at = new \DateTime();
     }
 
     public function getId(): ?int
@@ -51,18 +52,6 @@ class Message
         $this->id_message = $id_message;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getContent(): ?string
     {
         return $this->content;
@@ -75,12 +64,12 @@ class Message
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAt(\DateTime $created_at): self
     {
         $this->created_at = $created_at;
 
@@ -107,6 +96,30 @@ class Message
     public function setGhostDeletedAt(?\DateTimeInterface $ghost_deleted_at): self
     {
         $this->ghost_deleted_at = $ghost_deleted_at;
+
+        return $this;
+    }
+
+    public function getChannel(): ?Channel
+    {
+        return $this->channel;
+    }
+
+    public function setChannel(?Channel $channel): self
+    {
+        $this->channel = $channel;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

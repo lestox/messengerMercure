@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -58,12 +59,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
 
     /**
-     * @return array<User>
+     * @param User $user
+     * @return array
      */
-    public function findAllExceptConnectedUser(User $user): array{
+    public function findAllExceptConnectedUser(User $user): array
+    {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.id != :val')
-            ->setParameter('val', $user->getId())
+            ->select('u.id_user', 'u.first_name', 'u.last_name', 'u.photo')
+            ->where('u.id_user != :id')
+            ->setParameter('id', $user->getId())
             ->getQuery()
             ->getResult();
     }

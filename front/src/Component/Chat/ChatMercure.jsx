@@ -1,17 +1,28 @@
 import React from 'react'
 import {useEffect, useState} from "react"
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Container = styled.div`
     margin-top : 14vh;
-    background-color: yellow;
-    height: 40vh;
+    width: 70vw;
+    bottom: 0;
+    display: flex;
 `;
 
 const LIST = styled.li`
-    listStyle:"none";
-    text-decoration: "line-through";
-    text-color : black;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+    background: var(--primary-color);
+    text-color: var(--dark-text-color);
+    border-radius: 1.125rem 1.125rem 1.125rem 0;
+    min-height: 2.25rem;
+    width: fit-content;
+    max-width: 66%;
+    
+    box-shadow: 
+        0 0 2rem rgba(black, 0.075),
+        0rem 1rem 1rem -1rem rgba(black, 0.1);
 `;
 
 const ChatMercure = () => {

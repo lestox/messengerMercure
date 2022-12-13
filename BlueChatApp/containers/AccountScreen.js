@@ -4,7 +4,7 @@ export default function AccountScreen() {
 
     return (
         <View>
-            <Text> Account page</Text>
+            <Text style={{ textAlign: 'center', marginTop: 50 }}> Account page </Text>
         </View>
     )
 }

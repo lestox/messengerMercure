@@ -32,11 +32,9 @@ export default function HomeScreen() {
               // You can return any component that you like here!
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: 'tomato',
-            tabBarInactiveTintColor: 'gray',
           })}
       >
-        <Tab.Screen name="Chats" component={ChatsScreen} options={{ title: 'Chats', tabBarBadge: 3 }} />
+        <Tab.Screen name="Chats" component={ChatsScreen} options={{ title: 'Chats', tabBarBadge: 3, tabBarBadgeStyle: {backgroundColor: "#5F8BFF"} }} />
         <Tab.Screen name="Account" component={AccountScreen} options={{ title: 'Account' }} />
         <Tab.Screen name="Params" component={ParamsScreen} options={{ title: 'Parameters' }} />
       </Tab.Navigator>

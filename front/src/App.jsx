@@ -7,6 +7,33 @@ import {useEffect} from "react";
 
 
 function App() {
+    let eventSource;
+
+    const handleMessage = (e) => {
+        console.log(JSON.parse(e.data))
+    }
+
+    useEffect(() => {
+        fetch('http://localhost:1234/auth', {
+            method: 'GET',
+            credentials: "include",
+            mode: "cors"
+        })
+            .then(() => {
+                const url = new URL('http://localhost:2345/.well-known/mercure');
+                url.searchParams.append('topic', 'https://example.com/my-private-topic');
+                eventSource = new EventSource(url, {withCredentials: true});
+
+                eventSource.onmessage = handleMessage
+            });
+
+        if (eventSource !== undefined) {
+            return () => {
+                eventSource.close();
+            };
+        }
+    }, []);
+
   return (
     <BrowserRouter>
       <Routes>

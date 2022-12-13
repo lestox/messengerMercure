@@ -1,10 +1,10 @@
 import { StyleSheet, View, Text} from 'react-native';
 
-export default function AccountScreen() {
+export default function ParamsScreen() {
 
     return (
         <View>
-            <Text> Account page</Text>
+            <Text> Params page</Text>
         </View>
     )
 }

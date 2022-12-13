@@ -2,13 +2,19 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 const StyledMessageInput = styled.textarea`
-    width: 100%;
+    //width: calc(100% - 60px);
+    margin: 0 30px;
     height: 7vh;
-    background-color: #273C57;
+    background-color: var(--white-color);
+    border-radius: 20px;
+    width: calc(70vw - 60px);
     border: none;
     color: lightgray;
     padding: 20px;
+    margin-bottom: 25px;
     outline: none;
+    overflow: hidden;
+    resize: none;
     position: fixed;
     bottom: 0;
 `

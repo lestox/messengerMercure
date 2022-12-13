@@ -1,7 +1,8 @@
 import {useState} from "react";
 import '../assets/css/chat.css';
 import {useLocation, useNavigate} from "react-router-dom";
-import SideBar from "../Component/Chat/SideBar";
+import NavBar from "../Component/Global/NavBar";
+import ConvSideBar from "../Component/Chat/ConvSideBar";
 import Conversation from "../Component/Chat/Conversation";
 import styled from "styled-components";
 
@@ -17,15 +18,16 @@ export default function Chat() {
     const handleSubmit = (e) => {
     }
 
-    const StyledBody = styled.body`
+    const StyledGlobalContainer = styled.div`
         display: flex;
     `
 
     return (
-        <StyledBody>
-        <SideBar></SideBar>
-        <Conversation></Conversation>
-        </StyledBody>
+        <StyledGlobalContainer>
+            <NavBar/>
+            <ConvSideBar/>
+            <Conversation/>
+        </StyledGlobalContainer>
       
     )
 }

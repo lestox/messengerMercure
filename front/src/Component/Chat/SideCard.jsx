@@ -1,36 +1,31 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import UserImage from '../Global/UserImage'
 
 const StyledSideCard = styled.div`
-    width: 280px;
+    width: 100%;
     height: 10vh;
     display: flex;
     align-items: center;
     padding: 15px 0px 15px 20px;
-    position: absolute;
     
     &:hover {
-        background-color: #172d95;
+        background-color: var(--secondary-color);
         cursor: pointer;
       }
 `
-const StyledImg = styled.img`
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-`
 
-const StyledName = styled.h4`
+const StyledName = styled.h3`
     margin-left: 15px;
-    font-size: 1.2rem;
     margin-bottom: 0;
+    font-weight: 500;
 `
 
 const SideCard = () => {
     return (
         <>
         <StyledSideCard>
-            <StyledImg src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User profil picture"/>
+            <UserImage/>
             <StyledName>Paul Pogba</StyledName>
         </StyledSideCard>
         </>

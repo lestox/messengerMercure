@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 lexik_jwt_authentication:
     secret_key: '%env(resolve:JWT_SECRET_KEY)%'
     public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
@@ -30,3 +31,9 @@ lexik_jwt_authentication:
                 - jwt_hp
                 - jwt_s
     remove_token_from_body_when_cookies_used: true
+=======
+lexik_jwt_authentication:
+    secret_key: '%env(resolve:JWT_SECRET_KEY)%'
+    public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
+    pass_phrase: '%env(JWT_PASSPHRASE)%'
+>>>>>>> 35256268eabfd7fd6cc253ed2f6883354df2f918

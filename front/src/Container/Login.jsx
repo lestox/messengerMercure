@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import Button from "../Component/Global/Button";
 import styled from "styled-components";
+import logo from "../assets/svg/global/full-size-logo.svg"
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -15,52 +16,65 @@ export default function Login() {
     const handleSubmit = (e) => {
     }
 
+    const StyledGlobal = styled.div`
+    padding-top: 8vh;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
     const StyledLoginCard = styled.div`
-        min-width: 450px;
-        display: flex;
-        justify-content: center;
-        padding-top: 16vh;
+        margin-top: 30px;
+        width: 400px;
+        border-radius: 30px;
+        background-color: var(--white-color);
+        padding: 40px 70px;
+        text-align: center;
+        
       `
+
+    const StyledLogo = styled.img`
+      max-width: 150px;
+    `
+
+    const StyledRegisterLink = styled.a`
+      display: block;
+      font-size: 14px;
+      line-height: 16px;
+      color: var(--mid-text-color);
+      text-decoration-line: underline;
+    `
+
+     const StyledInput = styled.input`
+      border: 0px;
+      border-bottom: 1px solid var(--mid-text-color);
+      outline: none;
+`
+
+
+
 
 
     return (
-        <section className="vh-100">
-        <StyledLoginCard className="container-fluid">
-          <div>
-            <div>
-      
-              <div className="px-5 ms-xl-4">
-                <i className="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" ></i>
-              </div>
-      
-              <div>
-      
-                <form >
-      
-                  <h3 className="mb-2">Login</h3>
-      
-                  <div className="form-outline mb-4">
-                    <input type="email" id="form2Example18" className="form-control form-control-lg" />
-                    <label className="form-label" htmlFor="form2Example18">Email address</label>
-                  </div>
-      
-                  <div className="form-outline mb-2">
-                    <input type="password" id="form2Example28" className="form-control form-control-lg" />
-                    <label className="form-label" htmlFor="form2Example28">Password</label>
-                  </div>
-      
-                  <div className="mb-4">
-                    <Button primary>Login</Button>
-                  </div>
-      
-                  
-                </form>
-      
-              </div>
-      
-            </div>
-          </div>
+      <StyledGlobal>
+        <StyledLogo src={logo}/>
+        <StyledLoginCard>
+            <h2>Login</h2>
+            <>
+              <label><b>Nom d'utilisateur</b></label>
+              <StyledInput type="text" name="username" required/>
+
+              <label><b>Mot de passe</b></label>
+              <StyledInput type="password"  name="password" required/>
+              <Button primary class='center'>Log In</Button>
+            </>
+
+            
+            <StyledRegisterLink href="/register">Create account</StyledRegisterLink>
         </StyledLoginCard>
-      </section>
+      </StyledGlobal>
     )
 }

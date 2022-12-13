@@ -1,6 +1,3 @@
-import {useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
-import { Component } from "react";
 import Button from "../Component/Global/Button";
 import styled from "styled-components";
 
